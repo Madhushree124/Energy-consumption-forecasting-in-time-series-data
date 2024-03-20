@@ -1,0 +1,82 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+  /* background: url(https://images.unsplash.com/photo-1439792675105-701e6a4ab6f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=873&q=80); source: https://unsplash.com/photos/DjlKxYFJlTc */
+  /* background-color:whitesmoke; */
+  background: url("/static/images/2.jpg");
+  background-size: cover;
+  color: whitesmoke;
+  text-align: center;
+}
+
+.call-to-scroll {
+  margin: 0;
+}
+
+.responsive {
+  width: 100%;
+  height: auto;
+}
+
+.img-box {
+  width: 1200px;
+  height: 500px;
+  margin: 0 auto;
+  overflow: scroll;
+  border-radius: 10px;
+}
+
+.img-box > h2 {
+  margin: 0;
+  padding: 8px 4px;
+  text-align: left;
+}
+
+.img-box > p {
+  margin: 0 0 14px 0;
+  padding-right: 10px;
+  font-style: italic;
+  text-align: right;
+}
+
+</style>
+<body>
+  <h1>Domain_Result</h2>
+    <p class="call-to-scroll">scroll me ↓</p>
+    <div class="img-box">
+      <h2>Domain </h2>
+      <!-- <img class="responsive" src="https://images.unsplash.com/photo-1547190994-0dfe4ab1bdae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Lombard Street"> source: https://unsplash.com/photos/AFlG5jpMvYg -->
+      <h1>Data science.</h1>
+      <center><p>Data science is the study of data to extract meaningful insights for business. It is a multidisciplinary approach that combines principles and practices from the fields of mathematics, statistics, artificial intelligence, and computer engineering to analyze large amounts of data..</p></center><br><br>
+      <h2>Random Forest Regressor.</h2>
+      <!-- <img class="responsive" src="https://images.unsplash.com/photo-1521464302861-ce943915d1c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80" alt="Golden Gate Bridge"> source: https://unsplash.com/photos/o4mP43oPGHk -->
+      <center><p>Mean Rand Scoore Of Random Forest Regressor: 97.75683074339806</p>
+      <p>Mean R2 Scoore Of Random Forest Regressor :74.36088025062561</p>
+      <p>Mean Square Error Of Random Forest Regressor:25471.644681926304</p>
+      <p>Root Mean Square Of Error Random Forest Regressor:159.59838558684203</p>
+      <p>Mean Absolute Error of Random Forest Regressor:90.13983207771403</p>
+      <p>Explained Variance Score Of Random Forest Regressor:0.7436939117963961</p></center><br><br>
+      <h2>GradientBoostingRegressor.</h2>
+      <!-- <img class="responsive" src="https://images.unsplash.com/photo-1554107136-57b138ea99df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="The Painted Ladies"> source: https://unsplash.com/photos/HadloobmnQs -->
+      <center>
+        <p>Mean R2 Scoore Of GradientBoostingRegressor :0.9271269698316127</p>
+        <p>Mean Square Error Of GradientBoostingRegressor:8017169.127703623</p>
+        <p>Root Mean Square Of GradientBoostingRegressor:159.59838558684203</p>
+        <p>Mean Absolute Error of GradientBoostingRegressor:1499.7342259764798</p>
+        </center><br><br>
+      <h2>Technology</h2>
+      <!-- <img class="responsive" src="https://images.unsplash.com/photo-1537203925759-8e91b46284fc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=821&q=80" alt="Pier 7"> source: https://unsplash.com/photos/pi05YzeQjRc -->
+      <center><h1>Machine Learning.</h1></center>
+    </div>
+    <p class="call-to-scroll">scroll me ↑</p>
+    <a href="{% url 'Home_4' %}"  style="color: RED;font-size: 30PX;">Back to Home</a>
+</body>
+</html>

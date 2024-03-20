@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff;
+    color: #000;
+    font-size: 15px;
+    line-height: 1.5;
+}
+a {
+    color: #262626;
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+}
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+} /* Nav */
+.main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding: 20px 0;
+    font-size: 13px;
+}
+.main-nav .logo {
+    width: 110px;
+}
+.main-nav ul {
+    display: flex;
+}
+.main-nav ul li {
+    padding: 0 10px;
+}
+.main-nav ul li a {
+    padding-bottom: 2px;
+}
+.main-nav ul li a:hover {
+    border-bottom: 2px solid #262626;
+}
+.main-nav ul.main-menu {
+    flex: 1;
+    margin-left: 20px;
+}
+.menu-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    z-index: 2;
+    display: none;
+}
+.btn {
+    cursor: pointer;
+    display: inline-block;
+    border: 0;
+    font-weight: bold;
+    padding: 10px 20px;
+    background: #262626;
+    color: #fff;
+    font-size: 15px;
+}
+.btn:hover {
+    opacity: 0.9;
+}
+.dark {
+    color: #fff;
+}
+.dark .btn {
+    background: #f4f4f4;
+    color: #333;
+} /* Showcase */
+.showcase {
+    width: 100%;
+    height: 400px;
+    background: url("https://img.freepik.com/free-photo/solar-cell-farm-power-station-alternative-energy-from-sun_1150-4258.jpg?size=626&ext=jpg&ga=GA1.2.452998980.1692854332&semt=ais") no-repeat center
+        center/cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: flex-end;
+    padding-bottom: 50px;
+    margin-bottom: 20px;
+}
+.showcase h2,
+.showcase p {
+    margin-bottom: 10px;
+}
+.showcase .btn {
+    margin-top: 20px;
+} /* Home cards */
+.home-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    margin-bottom: 40px;
+}
+.home-cards img {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.home-cards h3 {
+    margin-bottom: 5px;
+}
+.home-cards a {
+    display: inline-block;
+    padding-top: 10px;
+    color: #0067b8;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.home-cards a:hover i {
+    margin-left: 10px;
+} /* Xbox */
+.xbox {
+    width: 100%;
+    height: 350px;
+    background: url("https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg?auto=compress&cs=tinysrgb&w=600") no-repeat center
+        center/cover;
+    margin-bottom: 20px;
+}
+.xbox .content {
+    width: 40%;
+    padding: 50px 0 0 30px;
+}
+.xbox p,
+.carbon p {
+    margin: 10px 0 20px;
+} /* Carbon */
+.carbon {
+    width: 100%;
+    height: 350px;
+    background: url("https://i.ibb.co/72cgtsz/carbon.jpg") no-repeat center
+        center/cover;
+}
+.carbon .content {
+    width: 55%;
+    padding: 100px 0 0 30px;
+} /* Follow */
+.follow {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 30px 0 30px;
+}
+.follow * {
+    margin-right: 10px;
+} /* Links */
+.links {
+    background: #f2f2f2;
+    color: #616161;
+    font-size: 12px;
+    padding: 35px 0;
+}
+.links-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 10px;
+    align-items: flex-start;
+    justify-content: center;
+}
+.links li {
+    line-height: 2.8;
+} /* Footer */
+.footer {
+    background: #f2f2f2;
+    color: #616161;
+    font-size: 12px;
+    padding: 20px 0;
+}
+.footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.footer div {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+.footer div i {
+    margin-right: 10px;
+}
+.footer ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+.footer li {
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+@media (max-width: 700px) {
+    .menu-btn {
+        display: block;
+    }
+    .menu-btn:hover {
+        opacity: 0.5;
+    }
+    .main-nav ul.right-menu {
+        margin-right: 50px;
+    }
+    .main-nav ul.main-menu {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #f2f2f2;
+        width: 50%;
+        height: 100%;
+        border-right: #ccc 1px solid;
+        opacity: 0.9;
+        padding: 30px;
+        transform: translateX(-500px);
+        transition: transform 0.5s ease-in-out;
+    }
+    .main-nav ul.main-menu li {
+        padding: 10px;
+        border-bottom: #ccc solid 1px;
+        font-size: 14px;
+    }
+    .main-nav ul.main-menu li:last-child {
+        border-bottom: 0;
+    }
+    .main-nav ul.main-menu.show {
+        transform: translateX(-20px);
+    }
+    .home-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .xbox .content p {
+        display: none;
+    }
+    .xbox .content h2 {
+        margin-bottom: 20px;
+    }
+    .carbon .content {
+        width: 85%;
+    }
+    .links .links-inner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 500px) {
+    .home-cards {
+        grid-template-columns: 1fr;
+    }
+    .links .links-inner {
+        grid-template-columns: 1fr;
+    }
+    .links .links-inner ul {
+        margin-bottom: 20px;
+    }
+}
+
+</style>
+<body>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+/>
+<div class="menu-btn"><i class="fas fa-bars fa-2x"></i></div>
+<div class="container">
+    <!-- Nav -->
+    <nav class="main-nav">
+        <img
+            src="data:image/png;base64,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"
+            alt="Microsoft"
+            class="logo"
+        />
+        <ul class="main-menu">
+            <li><a href="{% url 'Register_2' %}">Registeration</a></li>
+            <!-- <li><a href="#">Windows</a></li>
+            <li><a href="#">Surface</a></li>
+            <li><a href="#">Xbox</a></li>
+            <li><a href="#">Deals</a></li>
+            <li><a href="#">Support</a></li> -->
+        </ul>
+        <ul class="right-menu">
+            <li>
+                <a href="#"> <i class="fas fa-search"></i> </a>
+            </li>
+            <li>
+                <!-- <a href="#"> <i class="fas fa-shopping-cart"></i> </a> -->
+            </li>
+        </ul>
+    </nav>
+    <!-- Showcase -->
+    <header class="showcase">
+        <h2 style="color: black;font-size: 30px;">OPTIMIZE SOLAR ENERGY CONSUMPTION FORCASTING USING DYNAMIC FEATURES IN TIME SERIES ANALYSIS</h2>
+        <p style="color: white;font-size: 20px;">Solar power plants
+
+Where the sun's rays are converted into electricity</p>
+      
+    </header>
+    <br><br>
+
+    <div>
+      <center><p>In a solar power plant, the radiation coming from the sun's rays are converted into electricity for domestic or industrial use using diverse systems such as solar thermal plants or photovoltaic power plants.</p></center>
+      <br><br>
+      <center><p>Unlimited, clean, and accessible, even in remote areas, solar energy represents a excellent alternative to conventional energy sources, which is key for advancing in the ecological transition, but what types of technologies are currently used to produce it? The conversion of the energy coming from the sun's rays into electricity is carried out in a solar power plant by using different systems depending on its type.</p></center>
+    </div>
+    <br><br>
+    <div>
+      <center><h1 style="color: coral;">What is a solar power plant?</h1></center>
+    </div>
+    <br><br>
+    <section class="home-cards">
+      <div>
+        <p><b>A solar power plant is a facility that converts solar radiation, made up of light, heat, and ultraviolet radiation, into electricity suitable to be supplied to homes and industries.</b></p>
+      </div>
+      <div>
+        <center><p>The process of electricity production in a solar plant is completely ecological and doesn't generate polluting elements for the environment, as well as being one of the most efficient renewable energies that currently exist.</p></center><br>
+
+        <center>  <p>Thanks to these advantages of solar energy compared to energies generated from fossil fuels or non-renewable sources, solar power plants represent a key tool for developing a new long-term sustainable production model, which is completely eco-friendly. </p></center><br>
+          
+          <p>Depending on its operating system, there are two main types of solar plants: solar thermal power plants and solar photovoltaic plants. </p>
+      </div>
+    </section>
+    <div>
+      <center><h1><span style="color: coral;"> Types of solar power plants and how they work</span></h1></center>
+      <br>
+      <center><p>Although both solar thermal plants and photovoltaic power plants use solar energy to produce electricity, the process to generate it is different in each case.
+
+        We'll explain in detail how these two types of facilities work below.</p></center>
+    </div><br>
+    <!-- Home cards 1 -->
+    <section class="home-cards">
+        <div>
+            <img src="https://www.repsol.com/content/dam/repsol-corporate/es/energia-e-innovacion/central-solar-fotovoltaica-repsol.jpg" alt="" />  
+        </div>
+        <div>
+            <p>
+              A solar thermal plant is a facility designed for converting solar energy into electricity through a conventional thermodynamic cycle. However, unlike thermal power plants that work by using fossil fuels, solar thermal power plants use a completely eco-friendly energy source like sunlight. The technology used to produce electricity is slightly different depending on the type of solar thermal plant we're talking about, but its operating system is similar.
+              A solar thermal power plant concentrates the solar radiation to heat a fluid with thermally conductive properties and raise its temperature until it's converted into steam. It's then fed to a turbine. Here, the thermal energy is converted into mechanical energy, which is transmitted to an alternator where its final transformation into electricity takes place. Once the thermodynamic cycle has been completed, the steam is returned to a condenser where it recovers its liquid state and the process is repeated again. 
+            </p>
+            
+        </div>
+        <div>
+            
+            <h1>Solar photovoltaic power plant</h1>
+            <p>
+              The operation of a solar photovoltaic plant is based on photons and light energy from the sun’s rays. The types of solar panels used in these types of facilities are also different. While solar thermal plants use collectors, photovoltaic power plant use panels consisting of photovoltaic solar cells made of silicon (monocrystalline or polycrystalline solar panels) or other materials with photovoltaic properties (amorphous solar panels).
+            </p><br>
+            <h3>How do these solar cells work?</h3>
+            <p>Thanks to the materials they are made of, when the sun's rays strike them directly, the electrons contained in the more external layers of the photovoltaic cells absorb the radiation and generate direct current electricity. To build a solar photovoltaic plant, these solar cells are connected in series to be integrated into a single module, forming photovoltaic panels.
+
+              In turn, the solar panels are connected in parallel, forming strings coupled to a current inverter, where the direct current coming from the photovoltaic cells is transformed into alternating energy. Then the electricity is directed to a transformer in which its voltage and intensity are adapted so that it can be transported through the electrical grid lines to the consumption centers.</p>
+        </div>
+        <div>
+            <img src="https://www.repsol.com/content/dam/repsol-corporate/es/energia-e-innovacion/trabajador-central-solar-repsol-kappa.jpg" alt="" />
+             
+        </div>
+    </section>
+    <!-- Xbox -->
+    <section class="xbox">
+        <div class="content">
+            <h2><span style="color: whitesmoke;"  >Collector solar thermal power plant</span></h2>
+            <p style="color: whitesmoke;">
+              This type of solar thermal power plant captures the sun's rays through concentrating or high-temperature collectors. The collectors are concave mirrors, that are mounted on a structure that allows their position to be modified to increase the intensity of the solar radiation, reaching temperatures greater than 250°C.
+            </p>
+           
+        </div>
+    </section>
+    <!-- Home cards 2 -->
+    
+    <!-- Follow -->
+    <section class="follow">
+        <p>Follow</p>
+        <a href="https://facebook.com">
+            <img src="https://i.ibb.co/LrVMXNR/social-fb.png" alt="Facebook" />
+        </a>
+        <a href="https://twitter.com">
+            <img
+                src="https://i.ibb.co/vJvbLwm/social-twitter.png"
+                alt="Twitter"
+            />
+        </a>
+        <a href="https://linkedin.com">
+            <img
+                src="https://i.ibb.co/b30HMhR/social-linkedin.png"
+                alt="Linkedin"
+            />
+        </a>
+    </section>
+</div>
+<!-- {% block content%}
+{% endblock content%} -->
+<footer class="footer">
+    <div class="footer-inner">
+        <p><b>Solar radiation, often called the solar resource or just sunlight, is a general term for the electromagnetic radiation emitted by the sun. Solar radiation can be captured and turned into useful forms of energy, such as heat and electricity, using a variety of technologies. However, the technical feasibility and economical operation of these technologies at a specific location depends on the available solar resource.</b></p>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap');
+
+/*
+=====
+TEAMY CORE STYLES
+=====
+*/
+
+.teamy__layout{
+	position: relative;
+	overflow: hidden;
+	isolation: isolate;
+}
+
+.teamy__layout::before{
+	content: "";
+	background-color: var(--teamy-back-background-color, rgba(0, 0, 0, .7));
+	opacity: 0;
+
+	position: absolute;
+	z-index: 1;
+}
+
+.teamy__avatar{
+	display: block;
+	block-size: 100%;
+	inline-size: 100%;
+	object-fit: cover;
+}
+
+.teamy__back{
+	display: flex;
+	padding: var(--teamy-back-padding, 1.25rem);
+
+	position: absolute;
+	inset: 0; 
+	z-index: 1;
+}
+
+.teamy__back-content{
+	opacity: 0;
+	margin: auto;
+}
+
+.teamy__back-content:focus-within,
+.teamy:hover .teamy__back-content{
+	opacity: 1;
+}
+
+/*
+=====
+TEAMY MASKS BASICS
+=====
+*/
+
+/* circle */
+
+.teamy_mask-circle .teamy__layout::before{
+	block-size: 100%;
+	aspect-ratio: 1 / 1;
+	clip-path: circle(50% at 50% 50%);
+}
+
+/* triangle */
+
+.teamy_mask-triangle .teamy__layout::before{
+	block-size: 100%;
+	inline-size: 100%;
+	clip-path: polygon(0 100%, 50% 0, 50% 0, 100% 100%);
+}
+
+.teamy_mask-triangle:hover .teamy__layout::before,
+.teamy_mask-triangle:focus-within .teamy__layout::before{
+	opacity: 1;
+}
+
+/*
+=====
+TEAMY MASKS VARIETIES
+=====
+*/
+
+/* circle */
+
+.teamy_mask-circle .teamy__layout::before{
+	transform: translate(-50%, -50%) scale(0);
+	inset-block-start: 50%;
+	inset-inline-start: 50%;
+}
+
+.teamy_mask-circle:hover .teamy__layout::before,
+.teamy_mask-circle:focus-within .teamy__layout::before{
+	opacity: 1;
+	transform: translate(-50%, -50%) scale(1.3);
+}
+
+/* triangle */
+
+.teamy_mask-triangle .teamy__layout::before{
+	inset-block-end: 0;
+	inset-inline-start: 0;
+}
+
+/*
+=====
+TEAMY ANIMATIONS
+=====
+*/
+
+@media (prefers-reduced-motion: no-preference){
+
+	/* circle */
+
+	.teamy_mask-circle .teamy__layout::before{
+		transition: transform .3s ease, opacity .3s ease-out;
+		will-change: opacity, transform;
+	}
+
+	.teamy_mask-circle:hover .teamy__layout::before,
+	.teamy_mask-circle:focus-within .teamy__layout::before{
+		transition-duration: .6s;
+	}
+
+	/* triangle */
+
+	.teamy_mask-triangle .teamy__layout::before{
+		transition-property: clip-path, opacity;
+		transition-duration: .2s, .4s;
+		transition-delay: .4s, 0s;
+		transition-timing-function: ease-out;
+
+		will-change: clip-path, opacity;
+	}
+
+	.teamy_mask-triangle:hover .teamy__layout::before,
+	.teamy_mask-triangle:focus-within .teamy__layout::before{
+		clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%);
+		transition-delay: 0s;
+		transition-duration: .4s;
+	}
+
+	/* zoom preview */
+
+	.teamy_zoom-photo .teamy__avatar{
+		transition: transform .4s cubic-bezier(0.71, 0.05, 0.29, 0.9);
+		will-change: transform;
+		transform: scale(1);
+	}
+
+	.teamy_zoom-photo:hover .teamy__avatar,
+	.teamy_zoom-photo:focus-within .teamy__avatar{
+		transform: scale(1.2);
+	}
+
+	/* zoom and rotate preview */
+
+	.teamy_zoom-rotate-photo .teamy__avatar{
+		transition: transform .4s cubic-bezier(0.71, 0.05, 0.29, 0.9);
+		will-change: transform;
+		transform: scale(1) rotate(0);
+	}
+
+	.teamy_zoom-rotate-photo:hover .teamy__avatar,
+	.teamy_zoom-rotate-photo:focus-within .teamy__avatar{
+		transform: scale(1.2) rotate(5deg);
+	}
+
+	/* zoom and slide preview */
+
+	.teamy_zoom-slide-photo .teamy__avatar{
+		transition: transform .4s cubic-bezier(0.71, 0.05, 0.29, 0.9);
+		will-change: transform;
+		transform: scale(1) translate(0, 0);
+	}
+
+	.teamy_zoom-slide-photo:hover .teamy__avatar,
+	.teamy_zoom-slide-photo:focus-within .teamy__avatar{
+		transform: scale(1.2) translate(4%, 4%);
+	}
+
+	/* content animation */
+
+	.teamy__back-content:focus-within,
+	.teamy:hover .teamy__back-content{
+		transition: opacity .4s cubic-bezier(0.71, 0.05, 0.29, 0.9) .2s;
+	}
+}
+
+/*
+=====
+SCROLLER CORE STYLE
+=====
+*/
+
+.scroller{
+	display: var(--scroller-display, flex);
+	overflow: var(--scroller-overflow-x, auto) var(--scroller-overflow-y, auto);
+
+	scroll-snap-type: var(--scroller-scroll-snap-type, x mandatory);
+}
+
+.scroller__item{
+	inline-size: var(--ui-scroller-item-inline-size, calc(100% / var(--scroller-visible-items-number, 1)));
+	flex: none;
+	scroll-snap-align: var(--scroller-scroll-snap-align, start);
+}
+
+/*
+=====
+DEMO
+=====
+*/
+
+:root{
+	--teamy-back-background-color: rgba(72, 27, 174, .7);
+	--ui-button-background-color: #292548;
+	--ui-button-font-size: .75rem;
+	--ui-button-border-radius: 1rem;
+	--ui-button-padding: .5rem 1.5rem;
+	--scroller-overflow-x: auto;
+	--scroller-overflow-y: hidden;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Open Sans, Ubuntu, Fira Sans, Helvetica Neue, sans-serif;
+	line-height: 1.75;
+	background-color: #292548;
+	color: #222;
+	margin: 0;
+}
+
+h1, h2, h3, h4 {
+	letter-spacing: 1px;
+	font-family: 'Cherry Bomb One', cursive;
+}
+
+.r-button{
+	background-color: var(--r-button-background-color, transparent);
+	padding: var(--r-button-padding, 0);
+	border:
+		var(--r-button-border-width, 0)
+		var(--r-button-border-style, solid)
+		var(--r-button-border-color, currentColor);
+
+	font-family: var(--r-button-font-family, inherit);
+	font-size: var(--r-button-font-size, inherit);
+}
+
+.r-button:focus{
+	outline: none;
+}
+
+.r-button::-moz-focus-inner,
+.r-button[type="button"]::-moz-focus-inner,
+.r-button[type="reset"]::-moz-focus-inner,
+.r-button[type="submit"]::-moz-focus-inner {
+	--r-button-border-style: none;
+	--r-button-padding: 0;
+}
+
+.r-link{
+    display: var(--r-link-display, inline-flex);
+}
+
+.r-link[href]{
+    color: var(--r-link-color);
+    text-decoration: var(--r-link-text-decoration, none);
+}
+
+.r-link:focus{
+	outline: none;
+}
+
+.button{
+	display: var(--ui-button-display, inline-flex);
+	padding: var(--ui-button-padding,
+		var(--ui-button-padding-block-start, .25rem)
+		var(--ui-button-padding-inline-end, .25rem)
+		var(--ui-button-padding-block-end, .25rem)
+		var(--ui-button-padding-inline-start, .25rem)
+	);
+	background-color: var(--ui-button-background-color);
+	border: var(--ui-button-border-width) var(--ui-button-border-style, solid) var(--ui-button-border-color, currentColor);
+	border-radius: var(--ui-button-border-radius);
+	cursor: var(--ui-button-cursor, pointer);
+
+	font-family: var(--ui-button-font-family);
+	font-size: var(--ui-button-font-size);
+	color: var(--ui-button-color);
+	text-transform: var(--ui-button-text-transform, uppercase);
+}
+
+:focus .button{
+	outline: var(--ha-outline-width, 3px) var(--ha-outline-style, solid) var(--ha-outline-color, currentColor);
+	outline-offset: var(--ha-outline-offset, 0);
+} 
+
+.teamy{
+	--ui-button-color: #fefefe;
+	--ui-button-font-family: 'Cherry Bomb One', cursive;
+	
+	display: flex;
+	flex-direction: column;
+	
+	color: #fefefe;
+	text-align: center;
+}
+
+.teamy__content{
+	padding: 1.25rem;
+	order: 1;
+}
+
+.teamy__name{
+	display: block;
+	font-family: 'Cherry Bomb One', cursive;
+	font-size: 2rem;
+	letter-spacing: 1px;
+}
+
+.teamy__post{
+	display: block;
+	text-transform: uppercase;
+	font-size: .75rem;
+}
+
+@media (max-width: 480px){
+
+	.teamy-team{
+		--scroller-visible-items-number: 1.2;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 767px){
+
+	.teamy-team{
+		--scroller-visible-items-number: 1.8;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1024px){
+
+	.teamy-team{
+		--scroller-visible-items-number: 2.8;
+	}
+}
+
+@media (min-width: 1025px){
+
+	.teamy-team{
+		--scroller-visible-items-number: 3.8;
+	}
+}
+
+.teamy{
+	--ha-outline-color: #F0F0F0;
+	--ha-outline-offset: 7px;
+}
+
+.teamy__front{
+	block-size: 80dvh;
+}
+
+.teamy__content{
+	block-size: 15dvh;
+}
+
+.scroller{
+	block-size: 100dvh;
+}
+
+.scroller::-webkit-scrollbar {
+	inline-size: 15px;
+	block-size: 15px
+}
+
+.scroller::-webkit-scrollbar-thumb {
+	background-color: #53428c;
+	border-radius: 10px;
+	box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, .25), inset -2px -2px 2px rgba(0, 0, 0, .25);
+}
+
+.scroller::-webkit-scrollbar-track {
+	background-image: linear-gradient(90deg, #434343, #434343 1px, #262626 0, #262626)
+}
+
+.widget{
+	--ui-button-background-color: #ffd3bd;
+	--ui-button-border-width: 3px;
+	--ui-button-border-color: #ffa87c;
+	--ui-button-color: #222;
+	--ha-outline-offset: 5px;
+	--ha-outline-color: #6B2DA2;
+	
+	display: flex;
+	justify-content: center;
+}
+
+/*
+=====
+POPUP
+=====
+*/
+
+.popup{
+	display: none;
+}
+
+.active .popup{
+	display: flex;
+	position: fixed;
+	inset: 0;  
+}
+
+@media (prefers-reduced-motion: reduce){
+
+	.popup{
+		background-color: #f0f0f0;
+	}
+}
+
+.popup__container{
+	box-sizing: border-box;
+	inline-size: 100%;
+	block-size: 100dvh;
+	padding: 2rem 6rem 3rem 1rem;
+
+	overflow: auto;
+
+}
+
+.popup__content{
+	max-width: 70ch;
+	margin-inline: auto;
+}
+
+.popup__close{
+	position: fixed;
+	inset-block-start: 1.5rem;
+	inset-inline-end: 2.5rem;
+}
+
+.popup__close:focus{
+	outline: 3px solid #6B2DA2;
+	outline-offset: 5px;
+}
+
+.popup__close-text{
+	display: inline-flex;
+	padding-block: 0.25rem;	
+
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	letter-spacing: 1px;
+}
+
+@media (orientation: portrait) {
+	.popup__close {
+		inset-block-start: 93%;
+		inset-inline-end: 1.5rem;
+	}
+}
+
+/*
+animation
+*/
+
+@media (prefers-reduced-motion: no-preference){
+
+	.popup::before{
+		will-change: height, top;
+		animation: open-animation .6s cubic-bezier(0.83, 0.04, 0, 1.16) .65s both;
+	}
+
+	.popup::after{
+		will-change: width, opacity;
+		animation: line-animation .6s cubic-bezier(0.83, 0.04, 0, 1.16) both;
+	}
+
+	.popup::before{
+		content: "";
+		box-sizing: border-box;
+		inline-size: 100%;
+		background-color: #f0f0f0;
+
+		position: fixed;
+		inset-block-start: 50%;
+		inset-inline-start: 0;
+	}
+
+	.popup::after{
+		content: "";
+		inline-size: 0;
+		block-size: 2px;
+		background-color: #f0f0f0;
+
+		position: absolute;
+		inset-block-start: 50%;
+		inset-inline-start: 0;
+		margin-top: -1px;
+	}
+
+	.popup__container{
+		animation: fade .5s ease-out 1.3s both;
+	}
+}
+
+@keyframes line-animation{
+
+	0%{
+		width: 0;
+		opacity: 1;
+	}
+
+	99%{
+		width: 100%;
+		opacity: 1;
+	}
+
+	100%{
+		width: 100%;
+		opacity: 0;
+	}  
+}
+
+@keyframes open-animation{
+
+	0%{
+		height: 0;
+		top: 50%;
+	}
+
+	100%{
+		height: 100vh;
+		top: 0;
+	}
+}
+
+@keyframes fade{
+	0%{
+		opacity: 0;
+	}
+
+	100%{
+		opacity: 1;
+	}  
+}
+</style>
+<body>
+  <div>
+    
+    
+
+      <div class="main-container">
+        <div class="teamy-team">
+            <div class="scroller">
+                <div class="scroller__item"> 
+                    <div class="teamy teamy_mask-circle" aria-labelledby="person1">
+                        <div class="teamy__content" id="person1">
+                            <span class="teamy__name">MADHU SRI</span>
+                            <span class="teamy__post">CIT</span>
+                        </div>					
+                        <div class="teamy__layout">
+                            <div class="teamy__front">
+                                <img src="/static/images/C.png" class="teamy__avatar" alt="Suzan Lois' photo">
+                                <img src="/static/images/download.png" alt="Girl in a jacket" width="500" height="600">
+                            </div>
+                            <!-- <div class="teamy__back">
+                                <div class="teamy__back-content">
+                                    <button class="teamy__open r-button" onclick="openDialog('popup-article', this)">
+                                        <span class="button">show more</span> 
+                                    </button>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="scroller__item"> 
+                    <div class="teamy teamy_mask-circle teamy_zoom-photo" aria-labelledby="person2">
+                        <div class="teamy__content" id="person2">
+                            <span class="teamy__name">YOGA PRIYA</span>
+                            <span class="teamy__post">CIT</span>
+                        </div>					
+                        <div class="teamy__layout">
+                            <div class="teamy__front">
+                                <img src="/static/images/C.png" class="teamy__avatar" alt="Dora Caelan's photo">
+                                <img src="/static/images/download.png" alt="Girl in a jacket" width="500" height="600">
+                            </div>
+                            <!-- <div class="teamy__back">
+                                <div class="teamy__back-content">
+                                    <button class="teamy__open r-button" onclick="openDialog('popup-article', this)">
+                                        <span class="button">show more</span> 
+                                    </button>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+               
+    <div id="popup-article" role="dialog" aria-labelledby="dialog_title" aria-modal="true">
+        <div class="popup">
+            <div class="popup__container">
+                <div class="popup__content">
+                    <h2 id="dialog_title">About me</h2>
+                    <p>Guido van Rossum, best known as the Python programming language author, was born 31 January 1956 in Netherlands. In Python community, Van Rossum is known as a BDFL (Benevolent Dictator for Life), which means that he continues to oversee Python development process, and always making decisions where necessary. He worked at Google from 2005 till 7 2012, where he spent half of his time developing Python programming language. In 2013, Guido started working for Dropbox.</p>
+                    
+                    <p>Architecto magni dolores cumque tenetur nemo id aperiam, ratione temporibus at, consectetur totam, fuga et illo rerum earum dicta. Vitae ullam harum enim aliquid hic commodi voluptas cumque iste ex accusantium architecto doloremque reprehenderit, asperiores vero dolor, esse inventore dolorem.</p>
+                    <p>Excepturi eaque, reprehenderit dolores, cum molestias repellendus in expedita. Placeat totam, quos pariatur quidem explicabo id harum ab voluptatum. Necessitatibus, aliquam! Dolorum voluptatem ut laudantium excepturi cumque, hic iure impedit ullam accusantium error natus recusandae, quia fuga quo voluptates officiis?</p>    
+                    <p>Dignissimos debitis eos necessitatibus accusantium natus voluptates illo blanditiis corporis minus. Repudiandae libero quae, illo error expedita consectetur possimus voluptate eum esse quam molestiae tempore dignissimos ipsam similique ab quod. Ea earum adipisci rem voluptatem aliquid voluptatum deleniti necessitatibus provident.</p>
+                    <p>Dicta eum amet impedit maiores accusamus numquam saepe necessitatibus temporibus ut! Velit ducimus repellendus fuga repudiandae culpa voluptatibus delectus praesentium totam odit ratione, tenetur assumenda, labore esse et nostrum a, aut veritatis. Nihil, voluptas, impedit? Magnam dolorum, iure repellendus vitae.</p>
+                 
+                    
+                </div>
+                <button type="button" class="r-button popup__close" onclick="closeDialog(this)">
+                    <span class="popup__close-text">close</span> 
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        /*
+ *   This content is licensed according to the W3C Software License at
+ *   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
+ */
+
+'use strict';
+
+var aria = aria || {};
+
+aria.Utils = aria.Utils || {};
+
+(function () {
+  /*
+   * When util functions move focus around, set this true so the focus listener
+   * can ignore the events.
+   */
+  aria.Utils.IgnoreUtilFocusChanges = false;
+
+  aria.Utils.dialogOpenClass = 'has-dialog';
+
+  /**
+   * @description Set focus on descendant nodes until the first focusable element is
+   *       found.
+   * @param element
+   *          DOM node for which to find the first focusable descendant.
+   * @returns {boolean}
+   *  true if a focusable element is found and focus is set.
+   */
+  aria.Utils.focusFirstDescendant = function (element) {
+    for (var i = 0; i < element.childNodes.length; i++) {
+      var child = element.childNodes[i];
+      if (
+        aria.Utils.attemptFocus(child) ||
+        aria.Utils.focusFirstDescendant(child)
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }; // end focusFirstDescendant
+
+  /**
+   * @description Find the last descendant node that is focusable.
+   * @param element
+   *          DOM node for which to find the last focusable descendant.
+   * @returns {boolean}
+   *  true if a focusable element is found and focus is set.
+   */
+  aria.Utils.focusLastDescendant = function (element) {
+    for (var i = element.childNodes.length - 1; i >= 0; i--) {
+      var child = element.childNodes[i];
+      if (
+        aria.Utils.attemptFocus(child) ||
+        aria.Utils.focusLastDescendant(child)
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }; // end focusLastDescendant
+
+  /**
+   * @description Set Attempt to set focus on the current node.
+   * @param element
+   *          The node to attempt to focus on.
+   * @returns {boolean}
+   *  true if element is focused.
+   */
+  aria.Utils.attemptFocus = function (element) {
+    if (!aria.Utils.isFocusable(element)) {
+      return false;
+    }
+
+    aria.Utils.IgnoreUtilFocusChanges = true;
+    try {
+      element.focus();
+    } catch (e) {
+      // continue regardless of error
+    }
+    aria.Utils.IgnoreUtilFocusChanges = false;
+    return document.activeElement === element;
+  }; // end attemptFocus
+
+  /* Modals can open modals. Keep track of them with this array. */
+  aria.OpenDialogList = aria.OpenDialogList || new Array(0);
+
+  /**
+   * @returns {object} the last opened dialog (the current dialog)
+   */
+  aria.getCurrentDialog = function () {
+    if (aria.OpenDialogList && aria.OpenDialogList.length) {
+      return aria.OpenDialogList[aria.OpenDialogList.length - 1];
+    }
+  };
+
+  aria.closeCurrentDialog = function () {
+    var currentDialog = aria.getCurrentDialog();
+    if (currentDialog) {
+      currentDialog.close();
+      return true;
+    }
+
+    return false;
+  };
+
+  aria.handleEscape = function (event) {
+    var key = event.which || event.keyCode;
+
+    if (key === aria.KeyCode.ESC && aria.closeCurrentDialog()) {
+      event.stopPropagation();
+    }
+  };
+
+  document.addEventListener('keyup', aria.handleEscape);
+
+  /**
+   * @class
+   * @description Dialog object providing modal focus management.
+   *
+   * Assumptions: The element serving as the dialog container is present in the
+   * DOM and hidden. The dialog container has role='dialog'.
+   * @param dialogId
+   *          The ID of the element serving as the dialog container.
+   * @param focusAfterClosed
+   *          Either the DOM node or the ID of the DOM node to focus when the
+   *          dialog closes.
+   * @param focusFirst
+   *          Optional parameter containing either the DOM node or the ID of the
+   *          DOM node to focus when the dialog opens. If not specified, the
+   *          first focusable element in the dialog will receive focus.
+   */
+  aria.Dialog = function (dialogId, focusAfterClosed, focusFirst) {
+    this.dialogNode = document.getElementById(dialogId);
+    if (this.dialogNode === null) {
+      throw new Error('No element found with id="' + dialogId + '".');
+    }
+
+    var validRoles = ['dialog', 'alertdialog'];
+    var isDialog = (this.dialogNode.getAttribute('role') || '')
+      .trim()
+      .split(/\s+/g)
+      .some(function (token) {
+        return validRoles.some(function (role) {
+          return token === role;
+        });
+      });
+    if (!isDialog) {
+      throw new Error(
+        'Dialog() requires a DOM element with ARIA role of dialog or alertdialog.'
+      );
+    }
+
+    // Wrap in an individual backdrop element if one doesn't exist
+    // Native <dialog> elements use the ::backdrop pseudo-element, which
+    // works similarly.
+    var backdropClass = 'dialog-backdrop';
+    if (this.dialogNode.parentNode.classList.contains(backdropClass)) {
+      this.backdropNode = this.dialogNode.parentNode;
+    } else {
+      this.backdropNode = document.createElement('div');
+      this.backdropNode.className = backdropClass;
+      this.dialogNode.parentNode.insertBefore(
+        this.backdropNode,
+        this.dialogNode
+      );
+      this.backdropNode.appendChild(this.dialogNode);
+    }
+    this.backdropNode.classList.add('active');
+
+    // Disable scroll on the body element
+    document.body.classList.add(aria.Utils.dialogOpenClass);
+
+    if (typeof focusAfterClosed === 'string') {
+      this.focusAfterClosed = document.getElementById(focusAfterClosed);
+    } else if (typeof focusAfterClosed === 'object') {
+      this.focusAfterClosed = focusAfterClosed;
+    } else {
+      throw new Error(
+        'the focusAfterClosed parameter is required for the aria.Dialog constructor.'
+      );
+    }
+
+    if (typeof focusFirst === 'string') {
+      this.focusFirst = document.getElementById(focusFirst);
+    } else if (typeof focusFirst === 'object') {
+      this.focusFirst = focusFirst;
+    } else {
+      this.focusFirst = null;
+    }
+
+    // Bracket the dialog node with two invisible, focusable nodes.
+    // While this dialog is open, we use these to make sure that focus never
+    // leaves the document even if dialogNode is the first or last node.
+    var preDiv = document.createElement('div');
+    this.preNode = this.dialogNode.parentNode.insertBefore(
+      preDiv,
+      this.dialogNode
+    );
+    this.preNode.tabIndex = 0;
+    var postDiv = document.createElement('div');
+    this.postNode = this.dialogNode.parentNode.insertBefore(
+      postDiv,
+      this.dialogNode.nextSibling
+    );
+    this.postNode.tabIndex = 0;
+
+    // If this modal is opening on top of one that is already open,
+    // get rid of the document focus listener of the open dialog.
+    if (aria.OpenDialogList.length > 0) {
+      aria.getCurrentDialog().removeListeners();
+    }
+
+    this.addListeners();
+    aria.OpenDialogList.push(this);
+    this.clearDialog();
+    this.dialogNode.className = 'default_dialog'; // make visible
+
+    if (this.focusFirst) {
+      this.focusFirst.focus();
+    } else {
+      aria.Utils.focusFirstDescendant(this.dialogNode);
+    }
+
+    this.lastFocus = document.activeElement;
+  }; // end Dialog constructor
+
+  aria.Dialog.prototype.clearDialog = function () {
+    Array.prototype.map.call(
+      this.dialogNode.querySelectorAll('input'),
+      function (input) {
+        input.value = '';
+      }
+    );
+  };
+
+  /**
+   * @description
+   *  Hides the current top dialog,
+   *  removes listeners of the top dialog,
+   *  restore listeners of a parent dialog if one was open under the one that just closed,
+   *  and sets focus on the element specified for focusAfterClosed.
+   */
+  aria.Dialog.prototype.close = function () {
+    aria.OpenDialogList.pop();
+    this.removeListeners();
+    aria.Utils.remove(this.preNode);
+    aria.Utils.remove(this.postNode);
+    this.dialogNode.className = 'hidden';
+    this.backdropNode.classList.remove('active');
+    this.focusAfterClosed.focus();
+
+    // If a dialog was open underneath this one, restore its listeners.
+    if (aria.OpenDialogList.length > 0) {
+      aria.getCurrentDialog().addListeners();
+    } else {
+      document.body.classList.remove(aria.Utils.dialogOpenClass);
+    }
+  }; // end close
+
+  /**
+   * @description
+   *  Hides the current dialog and replaces it with another.
+   * @param newDialogId
+   *  ID of the dialog that will replace the currently open top dialog.
+   * @param newFocusAfterClosed
+   *  Optional ID or DOM node specifying where to place focus when the new dialog closes.
+   *  If not specified, focus will be placed on the element specified by the dialog being replaced.
+   * @param newFocusFirst
+   *  Optional ID or DOM node specifying where to place focus in the new dialog when it opens.
+   *  If not specified, the first focusable element will receive focus.
+   */
+  aria.Dialog.prototype.replace = function (
+    newDialogId,
+    newFocusAfterClosed,
+    newFocusFirst
+  ) {
+    aria.OpenDialogList.pop();
+    this.removeListeners();
+    aria.Utils.remove(this.preNode);
+    aria.Utils.remove(this.postNode);
+    this.dialogNode.className = 'hidden';
+    this.backdropNode.classList.remove('active');
+
+    var focusAfterClosed = newFocusAfterClosed || this.focusAfterClosed;
+    new aria.Dialog(newDialogId, focusAfterClosed, newFocusFirst);
+  }; // end replace
+
+  aria.Dialog.prototype.addListeners = function () {
+    document.addEventListener('focus', this.trapFocus, true);
+  }; // end addListeners
+
+  aria.Dialog.prototype.removeListeners = function () {
+    document.removeEventListener('focus', this.trapFocus, true);
+  }; // end removeListeners
+
+  aria.Dialog.prototype.trapFocus = function (event) {
+    if (aria.Utils.IgnoreUtilFocusChanges) {
+      return;
+    }
+    var currentDialog = aria.getCurrentDialog();
+    if (currentDialog.dialogNode.contains(event.target)) {
+      currentDialog.lastFocus = event.target;
+    } else {
+      aria.Utils.focusFirstDescendant(currentDialog.dialogNode);
+      if (currentDialog.lastFocus == document.activeElement) {
+        aria.Utils.focusLastDescendant(currentDialog.dialogNode);
+      }
+      currentDialog.lastFocus = document.activeElement;
+    }
+  }; // end trapFocus
+
+  window.openDialog = function (dialogId, focusAfterClosed, focusFirst) {
+    new aria.Dialog(dialogId, focusAfterClosed, focusFirst);
+  };
+
+  window.closeDialog = function (closeButton) {
+    var topDialog = aria.getCurrentDialog();
+    if (topDialog.dialogNode.contains(closeButton)) {
+      topDialog.close();
+    }
+  }; // end closeDialog
+
+  window.replaceDialog = function (
+    newDialogId,
+    newFocusAfterClosed,
+    newFocusFirst
+  ) {
+    var topDialog = aria.getCurrentDialog();
+    if (topDialog.dialogNode.contains(document.activeElement)) {
+      topDialog.replace(newDialogId, newFocusAfterClosed, newFocusFirst);
+    }
+  }; // end replaceDialog
+})();
+'use strict';
+/**
+ * @namespace aria
+ */
+
+var aria = aria || {};
+
+/**
+ * @description
+ *  Key code constants
+ */
+aria.KeyCode = {
+  BACKSPACE: 8,
+  TAB: 9,
+  RETURN: 13,
+  SHIFT: 16,
+  ESC: 27,
+  SPACE: 32,
+  PAGE_UP: 33,
+  PAGE_DOWN: 34,
+  END: 35,
+  HOME: 36,
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+  DELETE: 46,
+};
+
+aria.Utils = aria.Utils || {};
+
+// Polyfill src https://developer.mozilla.org/en-US/docs/Web/API/Element/matches
+aria.Utils.matches = function (element, selector) {
+  if (!Element.prototype.matches) {
+    Element.prototype.matches =
+      Element.prototype.matchesSelector ||
+      Element.prototype.mozMatchesSelector ||
+      Element.prototype.msMatchesSelector ||
+      Element.prototype.oMatchesSelector ||
+      Element.prototype.webkitMatchesSelector ||
+      function (s) {
+        var matches = element.parentNode.querySelectorAll(s);
+        var i = matches.length;
+        while (--i >= 0 && matches.item(i) !== this) {
+          // empty
+        }
+        return i > -1;
+      };
+  }
+
+  return element.matches(selector);
+};
+
+aria.Utils.remove = function (item) {
+  if (item.remove && typeof item.remove === 'function') {
+    return item.remove();
+  }
+  if (
+    item.parentNode &&
+    item.parentNode.removeChild &&
+    typeof item.parentNode.removeChild === 'function'
+  ) {
+    return item.parentNode.removeChild(item);
+  }
+  return false;
+};
+
+aria.Utils.isFocusable = function (element) {
+  if (element.tabIndex < 0) {
+    return false;
+  }
+
+  if (element.disabled) {
+    return false;
+  }
+
+  switch (element.nodeName) {
+    case 'A':
+      return !!element.href && element.rel != 'ignore';
+    case 'INPUT':
+      return element.type != 'hidden';
+    case 'BUTTON':
+    case 'SELECT':
+    case 'TEXTAREA':
+      return true;
+    default:
+      return false;
+  }
+};
+
+aria.Utils.getAncestorBySelector = function (element, selector) {
+  if (!aria.Utils.matches(element, selector + ' ' + element.tagName)) {
+    // Element is not inside an element that matches selector
+    return null;
+  }
+
+  // Move up the DOM tree until a parent matching the selector is found
+  var currentNode = element;
+  var ancestor = null;
+  while (ancestor === null) {
+    if (aria.Utils.matches(currentNode.parentNode, selector)) {
+      ancestor = currentNode.parentNode;
+    } else {
+      currentNode = currentNode.parentNode;
+    }
+  }
+
+  return ancestor;
+};
+
+aria.Utils.hasClass = function (element, className) {
+  return new RegExp('(\\s|^)' + className + '(\\s|$)').test(element.className);
+};
+
+aria.Utils.addClass = function (element, className) {
+  if (!aria.Utils.hasClass(element, className)) {
+    element.className += ' ' + className;
+  }
+};
+
+aria.Utils.removeClass = function (element, className) {
+  var classRegex = new RegExp('(\\s|^)' + className + '(\\s|$)');
+  element.className = element.className.replace(classRegex, ' ').trim();
+};
+
+aria.Utils.bindMethods = function (object /* , ...methodNames */) {
+  var methodNames = Array.prototype.slice.call(arguments, 1);
+  methodNames.forEach(function (method) {
+    object[method] = object[method].bind(object);
+  });
+};
+
+    </script>
+</body>
+</html>

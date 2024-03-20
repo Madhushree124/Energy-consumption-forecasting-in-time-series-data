@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<style>
+            :root {
+                --dark-purple: #114177;
+                --light-purple: #099dd8;
+              }
+              
+              body {
+                padding-block: 5vh;
+                margin: 0;
+              
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+                line-height: 1.5;
+                color: white;
+                background-image: url("/static/images/A21.jpg");
+       
+                    background-repeat: no-repeat;
+                    background-attachment: fixed;
+                    background-size: 100% 100%;
+                
+                
+              }
+              
+              h1 {
+                margin-top: 0;
+              }
+              
+              #description {
+                font-size: 1.2em;
+                font-style: italic;
+              }
+              
+              #survey-form {
+                display: flex;
+                flex-flow: column;
+                gap: 0.5em;
+              
+                width: min(40em, 70vw);
+                padding: 1.5em 2em;
+                border-radius: 1.5em;
+                margin: 0 auto;
+              
+                color: white;
+                background-color: var(--dark-purple);
+              }
+              
+              #survey-form > label {
+                padding-left: 0.5em;
+              
+                text-align: left;
+                font-size: 1.2em;
+              }
+              
+              #survey-form > * + :is(label, fieldset, button) {
+                margin-top: 0.5em;
+              }
+              
+              #survey-form :where(input, select, textarea) {
+                padding: 0.5rem 1rem;
+                border: 3px var(--dark-purple) solid;
+                border-radius: 0.5em;
+              
+                font-size: 1.1em;
+              }
+              
+              #survey-form :where(input, select, textarea):focus {
+                border-color: var(--light-purple);
+                outline: none;
+              }
+              
+              #survey-form input[name="age"] {
+                width: 2em;
+              }
+              
+    
+              
+              /* Disable number input arrows */
+              input::-webkit-outer-spin-button,
+              input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+              }
+              
+              input[type="number"] {
+                text-align: right;
+              }
+              
+              select :first-child {
+                /* Hiding the placeholder */
+                display: none;
+              }
+              
+              fieldset legend {
+                text-align: left;
+              }
+              
+              fieldset input {
+                margin: 0;
+              }
+              
+              fieldset[name="langs"] div {
+                display: grid;
+                grid-template-columns: repeat(4, auto 1fr);
+                gap: 0.5em;
+                align-items: center;
+              }
+              
+              fieldset[name="langs"] label {
+                text-align: left;
+              }
+              
+              fieldset[name="recommend"] div {
+                display: flex;
+                align-items: center;
+                padding-inline: 1em;
+              }
+              
+              fieldset[name="recommend"] label {
+                margin-left: 0.5em;
+                text-transform: capitalize;
+              }
+              
+              fieldset input:not(:first-child) {
+                margin-left: auto;
+              }
+              
+              textarea {
+                resize: none;
+                overflow-y: auto;
+              }
+              
+              #survey-form button {
+                align-self: flex-end;
+              
+                width: max-content;
+                padding: 0.6em 1em;
+                border: none;
+                border-radius: 0.5em;
+                box-shadow: 0 0 2px 1px #0002;
+              
+                font-size: 1.2em;
+                background-color: var(--light-purple);
+                color: white;
+              
+                transition: all 0.2s ease;
+                cursor: pointer;
+              }
+
+              
+              #survey-form button:hover {
+                box-shadow: 0 0 4px 2px #0003;
+                transform: scale(1.1);
+              }
+              @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        *{
+          margin: 0;
+          padding: 0;
+        }
+
+
+
+        p{
+          color:whitesmoke;
+          font-size:20px;
+        }
+
+
+        div > :last-child {
+          transform: rotatex(180deg) translatey(15px);
+          -webkit-mask-image: linear-gradient(transparent 40%, white 90%);
+          mask-image: linear-gradient(transparent 50%, white 90%);
+          opacity: 0.7;
+        }      
+</style>
+<script>
+              // matthais example
+          document.querySelector("#survey-form").addEventListener("submit", (e) => {
+              e.preventDefault();
+              const data = new FormData(e.target);
+              const arr = [...data];
+              console.table(arr);
+              console.log(data.getAll("langs"));
+              console.dir(Object.fromEntries(arr));
+            });
+            
+</script>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+      <h1>Solar Energy consumption forecasting </h1>
+      <a href="{% url 'Home_4' %}"><h1 style="color:var(--light-purple);">HOME</h1></a>
+      <!-- <p id="description">
+           THE MACHINE LEARNING PROJECT
+      </p><br><br> -->
+
+    <form id="survey-form" action="{% url 'forcast' %}" method="post">
+        {% csrf_token %}
+      
+        <label for="selectRole">START</label>
+        <input id="selectRole" name="START" type="string" required>
+  
+        <label for="selectRole">END</label>
+        <input id="selectRole" name="END" type="string" required>
+  
+      <button type="submit">SUBMIT</button>
+      
+      <br>
+      <img src="data:image/png;base64,{{ prediction_image_base64 }}" alt="FORCASTING">
+
+
+
+    </form>
+  </body>
+</html>
+
+</body>
+</html>
+

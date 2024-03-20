@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+                body {
+                margin: 0;
+                padding: 0;
+                background: url("/static/images/2.jpg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+
+                }
+
+                #container {
+                width: 100%;
+                background: rgba(0,0,0,0.2);
+                padding: 20px 10px 20px;
+                }
+
+                form {
+                width: 60vw;
+                margin: auto;
+                font-family: Arial;
+                background: rgba(186, 236, 245, 0.8);
+                padding: 30px;
+                color: white;
+                border-radius: 10px;
+                }
+
+                fieldset {
+                margin: 10px;
+                border: none;
+                }
+
+                h1, p {
+                text-align: center
+                }
+
+                #name, #email, #number {
+                display: block;
+                width: 97%;
+                height: 40px;
+                margin: 5px 0;
+                padding: 3px;
+
+                }
+
+                label {
+                display: block;
+                margin: 30px 0;
+                }
+
+                .inline {
+                width: unset;
+                margin: 0 0.5em 0 0;
+                vertical-align: middle;
+                }
+
+                #dropdown {
+                display: block;
+                width: 100%
+                }
+
+                #submit{
+                margin: 20px auto;
+                display: block;
+                width: 60%;
+                height: 3em;
+                background: rgb(224, 239, 241);
+                border-radius: 10px;
+                }
+
+                textarea {
+                width: 100%;
+                margin: 10px auto;
+                border-radius: 5px;
+
+                }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1 style="font-size: 60px;color: white;" id="title" >Personal Registeration</h1>
+        <!-- <center>
+            <h3 style="font-size: 40px;" id="description">Personal information, often abbreviated as "PI" or "PII" (Personally Identifiable Information), refers to data or details that can be used to identify, contact, or locate a specific individual. This information can be sensitive and is often subject to privacy laws and regulations to protect individuals' privacy and security. Personal information.</h3>
+        </center> -->
+        <form method="post">
+            {% csrf_token %}
+            <a href="{% url 'Home_4' %}" >Back to Home</a>
+                <fieldset>
+
+                    <label>First_Name</label>
+                    <input id="email" name="firstname" type="text" />
+                    <label>Last_Name</label>
+                    <input id="email" name="lastname" type="text"  />
+
+                    <label>Age</label>
+                    <input id="email" name="age" type="number"  />
+
+                    <label>Address</label>
+                    <input id="email" name="address" type="text" />
+
+                    <label>Phone_No</label>
+                    <input id="email" name="phone" type="number"  />
+
+                    <label>City</label>
+                    <input id="email" name="city" type="text"  />
+
+                    <label>State</label>
+                    <input id="email" name="state" type="text"  />
+
+                    <label>Nationality</label>
+                    <input id="email" name="country" type="text"  />
+                    
+                </fieldset>
+
+                <fieldset>
+                    <input id="submit" type="submit" />
+                    
+                </fieldset>
+        </form>
+      </div>
+      <script>
+            const form = document.getElementById("survey-form");
+
+            form.addEventListener("submit", handle_submit);
+
+            function handle_submit(event)
+            {
+            event.preventDefault();
+            alert("Thank you!");
+            }
+    </script>
+    
+</body>
+</html>
